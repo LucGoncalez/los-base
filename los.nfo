@@ -3,15 +3,16 @@
 # bem como linhas em branco
 
 # Estrutura do arquivo
-# Nome do repo # repo remoto # repo local
-LOS-Libs16	git@github.com:LucGoncalez/los-libs16.git	src/libs/libs16
-LoadLOS	git@github.com:LucGoncalez/loadlos.git	src/loadlos
-LOS-Tests	git@github.com:LucGoncalez/los-tests.git	src/tests
-LOS-FPC-RTL	git@github.com:LucGoncalez/los-fpc-rtl.git	src/libs/fpc-rtl
-LOS-SystemLibs	git@github.com:LucGoncalez/los-systemlibs.git	src/libs/system
-LOS-StdLibs	git@github.com:LucGoncalez/los-stdlibs.git	src/libs/stdlibs
-LOS-DriversLibs	git@github.com:LucGoncalez/los-driverslibs.git	src/libs/drivers
-LOS-KernelLibs	git@github.com:LucGoncalez/los-kernellibs.git	src/libs/kernel
-LOS-Drivers	git@github.com:LucGoncalez/los-drivers.git	src/drivers
-LOS-Kernel	git@github.com:LucGoncalez/los-kernel.git	src/kernel
-LOS-System	git@github.com:LucGoncalez/los-system.git	src/system
+# Nome do repo # repo remoto via SSH # repo remoto via HTTPS # repo local
+
+LOS-Libs16	git@github.com:LucGoncalez/los-libs16.git	https://github.com/LucGoncalez/los-libs16.git	src/libs/libs16
+LoadLOS	git@github.com:LucGoncalez/loadlos.git	https://github.com/LucGoncalez/loadlos.git	src/loadlos
+LOS-Tests	git@github.com:LucGoncalez/los-tests.git	https://github.com/LucGoncalez/los-tests.git	src/tests
+LOS-FPC-RTL	git@github.com:LucGoncalez/los-fpc-rtl.git	https://github.com/LucGoncalez/los-fpc-rtl.git	src/libs/fpc-rtl
+LOS-SystemLibs	git@github.com:LucGoncalez/los-systemlibs.git	https://github.com/LucGoncalez/los-systemlibs.git	src/libs/system
+LOS-StdLibs	git@github.com:LucGoncalez/los-stdlibs.git	https://github.com/LucGoncalez/los-stdlibs.git	src/libs/stdlibs
+LOS-DriversLibs	git@github.com:LucGoncalez/los-driverslibs.git	https://github.com/LucGoncalez/los-driverslibs.git	src/libs/drivers
+LOS-KernelLibs	git@github.com:LucGoncalez/los-kernellibs.git	https://github.com/LucGoncalez/los-kernellibs.git	src/libs/kernel
+LOS-Drivers	git@github.com:LucGoncalez/los-drivers.git	https://github.com/LucGoncalez/los-drivers.git	src/drivers
+LOS-Kernel	git@github.com:LucGoncalez/los-kernel.git	https://github.com/LucGoncalez/los-kernel.git	src/kernel
+LOS-System	git@github.com:LucGoncalez/los-system.git	https://github.com/LucGoncalez/los-system.git	src/system
