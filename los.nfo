@@ -16,3 +16,5 @@ LOS-KernelLibs	git@github.com:LucGoncalez/los-kernellibs.git	https://github.com/
 LOS-Drivers	git@github.com:LucGoncalez/los-drivers.git	https://github.com/LucGoncalez/los-drivers.git	src/drivers
 LOS-Kernel	git@github.com:LucGoncalez/los-kernel.git	https://github.com/LucGoncalez/los-kernel.git	src/kernel
 LOS-System	git@github.com:LucGoncalez/los-system.git	https://github.com/LucGoncalez/los-system.git	src/system
+LOS-Work	git@github.com:LucGoncalez/LuckyOS-Work.git	https://github.com/LucGoncalez/LuckyOS-Work.git	workdir
+LOS-Temp	git@github.com:LucGoncalez/LuckyOS-Temp.git	https://github.com/LucGoncalez/LuckyOS-Temp.git	worktemp
