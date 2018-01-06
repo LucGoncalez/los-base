@@ -24,8 +24,8 @@
 #	============================================================================
 #	Script para obter e atualizar todos os repositórios
 #	----------------------------------------------------------------------------
-#	Versao: 0.0
-#	Data: 13/04/2014
+#	Versao: 0.1
+#	Data: 06/01/2018
 #	----------------------------------------------------------------------------
 #	Executar:
 #			./getlos
@@ -79,29 +79,9 @@ EOF
 	fi
 }
 
-
-# Função principal
-function main() {
-	echo -e "\n${cgreen} #################### Bem vindo ao Projeto LOS #################### ${cnormal}\n"
-
-	if ! checklicence ; then
-		echo -e "${cred}A licença não foi aceita.${cnormal}"
-		echo -e "${cyellow}Abortando!${cnormal}\n"
-		exit 1
-	fi
-
-	echo -en "\nAtualizando repositório principal... "
-
-	if $(git pull 2>&1 > /dev/null) ; then
-		echo -e "[${cgreen}OK${cnormal}]"
-	else
-		echo -e "[${cred}FALHA${cnormal}]"
-		echo -e "\n${cred}Não foi possível atualizar o repositório principal.${cnormal}"
-		echo -e "${cyellow}Abortando!${cnormal}\n"
-		exit 1
-	fi
-
-	echo -en "Verificando arquivo de informação... "
+# Função que obtem os subrepositórios
+function getrepos() {
+	echo -en "\nVerificando arquivo de informação... "
 
 	if [ -e "${infofile}" ] ; then
 		echo -e "[${cgreen}OK${cnormal}]"
@@ -158,6 +138,40 @@ function main() {
 			fi
 		fi
 	done
+}
+
+
+# Função principal install
+function installmain() {
+	echo -e "\n${cgreen} #################### Bem vindo ao Projeto LOS #################### ${cnormal}\n"
+
+	if ! ${ignorelicence} && ! checklicence ; then
+		echo -e "${cred}A licença não foi aceita.${cnormal}"
+		echo -e "${cyellow}Abortando!${cnormal}\n"
+		exit 1
+	fi
+
+	if ${sshmode} ; then
+		reporemote="git@github.com:LucGoncalez/LuckyOS.git"
+	else
+		reporemote="https://github.com/LucGoncalez/LuckyOS.git"
+	fi
+
+	echo -en "\nObtendo repositório principal (usando: ${cyellow}'${reporemote}'${cnormal})... "
+
+	if $(git clone "${reporemote}" >&2 2>/dev/null) ; then
+		echo -e "[${cgreen}OK${cnormal}]"
+	else
+		echo -e "[${cred}FALHA${cnormal}]"
+		echo -e "\n${cred}Não foi possível atualizar o repositório principal.${cnormal}"
+		echo -e "${cyellow}Abortando!${cnormal}\n"
+		exit 1
+	fi
+
+	cd LuckyOS
+
+	getrepos
+
 
 	echo -e "${cgreen}"
 	echo " ##########################################################################"
@@ -175,10 +189,69 @@ function main() {
 	echo -e "${cnormal}"
 }
 
-if [ "$1" = "--ssh" ] ; then
-	sshmode="true"
-else
-	sshmode="false"
+# Função principal update
+function updatemain() {
+	if [ $(git remote -v show | grep "fetch" | grep "http" | wc -l) -eq 0 ] ; then
+		sshmode="true"
+	else
+		sshmode="false"
+	fi
+
+	echo -en "\nAtualizando repositório principal... "
+
+	if $(git pull 2>&1 > /dev/null) ; then
+		echo -e "[${cgreen}OK${cnormal}]"
+	else
+		echo -e "[${cred}FALHA${cnormal}]"
+		echo -e "\n${cred}Não foi possível atualizar o repositório principal.${cnormal}"
+		echo -e "${cyellow}Abortando!${cnormal}\n"
+		exit 1
+	fi
+
+	getrepos
+
+	echo -e "\n${cyellow}Tudo atualizado!${cnormal}\n"
+}
+
+
+error="false"
+sshmode="false"
+ignorelicence="false"
+
+while [ "${error}" = "false" ] && [ $# -gt 0 ] ; do
+	if [ "${1:0:2}" = "--" ] ; then
+		case "$1" in
+			--ssh) sshmode="true" ;;
+			--ignore-licence) ignorelicence="true" ;;
+			*) error="true"
+		esac
+	elif [ "${1:0:1}" = "-" ] ; then
+		paramopt="${1:1}"
+
+		while [ ${#paramopt} -gt 0 ] ; do
+			case "${paramopt:0:1}" in
+				s) sshmode="true" ;;
+				n) ignorelicence="true" ;;
+				*) error="true" ;;
+			esac
+
+			paramopt="${paramopt:1}"
+	done
+	else
+		error="true"
+	fi
+
+	shift
+done
+
+if ${error} ; then
+	echo -e "${cred}Parametro informado incorreto.${cnormal}"
+	echo -e "${cyellow}Abortando!${cnormal}\n"
+	exit 1
 fi
 
-main
+if [ -d ".git" ] ; then
+	updatemain
+else
+	installmain
+fi;
