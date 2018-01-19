@@ -1,35 +1,35 @@
 #!/bin/bash
-#	============================================================================
-#	Este arquivo pertence ao Projeto do Sistema Operacional LuckyOS (LOS).
-#	----------------------------------------------------------------------------
-#	Copyright (C) 2013 - Luciano L. Goncalez
-#	----------------------------------------------------------------------------
-#	a.k.a.: Master Lucky
-#	eMail : master.lucky.br@gmail.com
-#	Home  : http://lucky-labs.blogspot.com.br
-#	============================================================================
-#	Este programa e software livre; voce pode redistribui-lo e/ou modifica-lo
-#	sob os termos da Licenca Publica Geral GNU, conforme publicada pela Free
-#	Software Foundation; na versao 2 da	Licenca.
+# ============================================================================
+# Este arquivo pertence ao Projeto do Sistema Operacional LuckyOS (LOS).
+# ----------------------------------------------------------------------------
+# Copyright (C) 2013 - Luciano L. Goncalez
+# ----------------------------------------------------------------------------
+# a.k.a.: Master Lucky
+# eMail : master.lucky.br@gmail.com
+# Home  : http://lucky-labs.blogspot.com.br
+# ============================================================================
+# Este programa e software livre; voce pode redistribui-lo e/ou modifica-lo
+# sob os termos da Licenca Publica Geral GNU, conforme publicada pela Free
+# Software Foundation; na versao 2 da Licenca.
 #
-#	Este programa e distribuido na expectativa de ser util, mas SEM QUALQUER
-#	GARANTIA; sem mesmo a garantia implicita de COMERCIALIZACAO ou de
-#	ADEQUACAO A QUALQUER PROPOSITO EM PARTICULAR. Consulte a Licenca Publica
-#	Geral GNU para obter mais detalhes.
+# Este programa e distribuido na expectativa de ser util, mas SEM QUALQUER
+# GARANTIA; sem mesmo a garantia implicita de COMERCIALIZACAO ou de
+# ADEQUACAO A QUALQUER PROPOSITO EM PARTICULAR. Consulte a Licenca Publica
+# Geral GNU para obter mais detalhes.
 #
-#	Voce deve ter recebido uma copia da Licenca Publica Geral GNU junto com
-#	este programa; se nao, escreva para a Free Software Foundation, Inc., 59
-#	Temple Place, Suite 330, Boston, MA	02111-1307, USA. Ou acesse o site do
-#	GNU e obtenha sua licenca: http://www.gnu.org/
-#	============================================================================
-#	Script para obter e atualizar todos os repositórios
-#	----------------------------------------------------------------------------
-#	Versao: 0.1
-#	Data: 06/01/2018
-#	----------------------------------------------------------------------------
-#	Executar:
-#			./getlos
-#	============================================================================
+# Voce deve ter recebido uma copia da Licenca Publica Geral GNU junto com
+# este programa; se nao, escreva para a Free Software Foundation, Inc., 59
+# Temple Place, Suite 330, Boston, MA 02111-1307, USA. Ou acesse o site do
+# GNU e obtenha sua licenca: http://www.gnu.org/
+# ============================================================================
+# Script para obter e atualizar todos os repositórios
+# ----------------------------------------------------------------------------
+# Versao: 0.1
+# Data: 06/01/2018
+# ----------------------------------------------------------------------------
+# Executar:
+#     ./getlos
+# ============================================================================
 
 # Escapes de cores
 cnormal="\e[m"
@@ -45,172 +45,172 @@ infofile="los.nfo"
 
 # Função que verifica licença
 function checklicence() {
-	echo -e "${cred}Para a instalação deste software é necessário a aceitação da licença abaixo.${cnormal}"
+  echo -e "${cred}Para a instalação deste software é necessário a aceitação da licença abaixo.${cnormal}"
 
 cat << EOF | expand -t2 | less -XFe
 
-		Esse script ira obter todos os respositórios do Projeto LOS.
+    Esse script ira obter todos os respositórios do Projeto LOS.
 
-		O Projeto LOS (LuckyOS) é um sistema operacional escrito em Pascal e Assembly,
-		com finalidade didática.
+    O Projeto LOS (LuckyOS) é um sistema operacional escrito em Pascal e Assembly,
+    com finalidade didática.
 
-		Copyright (C) 2013 Luciano Gonçalez
+    Copyright (C) 2013 Luciano Gonçalez
 
-		Este programa é software livre; você pode redistribuí-lo e/ou
-		modificá-lo sob os termos da Licença Pública Geral GNU, conforme
-		publicada pela Free Software Foundation; na versão 2 da	Licença.
+    Este programa é software livre; você pode redistribuí-lo e/ou
+    modificá-lo sob os termos da Licença Pública Geral GNU, conforme
+    publicada pela Free Software Foundation; na versão 2 da Licença.
 
-		Este programa é distribuído na expectativa de ser útil, mas SEM
-		QUALQUER GARANTIA; sem mesmo a garantia implícita de
-		COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
-		PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
-		detalhes.
+    Este programa é distribuído na expectativa de ser útil, mas SEM
+    QUALQUER GARANTIA; sem mesmo a garantia implícita de
+    COMERCIALIZAÇÃO ou de ADEQUAÇÃO A QUALQUER PROPÓSITO EM
+    PARTICULAR. Consulte a Licença Pública Geral GNU para obter mais
+    detalhes.
 
-		Você deve ter recebido uma cópia da Licença Pública Geral GNU
-		junto com este programa, veja arquivos LICENSE ou LICENCA.
+    Você deve ter recebido uma cópia da Licença Pública Geral GNU
+    junto com este programa, veja arquivos LICENSE ou LICENCA.
 
 EOF
 
-	echo -en "${cyellow}Concorda com os termos da licença?[sim/NAO] ${cnormal}"
-	read key
+  echo -en "${cyellow}Concorda com os termos da licença?[sim/NAO] ${cnormal}"
+  read key
 
-	if [ "$key" != "sim" ] ; then
-		return 1
-	fi
+  if [ "$key" != "sim" ] ; then
+    return 1
+  fi
 }
 
 # Função que obtem os subrepositórios
 function getrepos() {
-	echo -en "\nVerificando arquivo de informação... "
+  echo -en "\nVerificando arquivo de informação... "
 
-	if [ -e "${infofile}" ] ; then
-		echo -e "[${cgreen}OK${cnormal}]"
-	else
-		echo -e "[${cred}FALHA${cnormal}]"
-		echo -e "\n${cred}Não foi possível localizar o arquivo ${cyellow}'${infofile}'${cnormal}."
-		echo -e "${cyellow}Abortando!${cnormal}\n"
-		exit 1
-	fi
+  if [ -e "${infofile}" ] ; then
+    echo -e "[${cgreen}OK${cnormal}]"
+  else
+    echo -e "[${cred}FALHA${cnormal}]"
+    echo -e "\n${cred}Não foi possível localizar o arquivo ${cyellow}'${infofile}'${cnormal}."
+    echo -e "${cyellow}Abortando!${cnormal}\n"
+    exit 1
+  fi
 
-	maindir=$(pwd)
+  maindir=$(pwd)
 
-	echo -en "Lendo informações dos repositórios... "
+  echo -en "Lendo informações dos repositórios... "
 
-	# Pegando array com os repositórios
-	IFS=$'\n'
-	repo=($(cat "$infofile" | grep -v "^\s*#\|^$"))
-	IFS=$STDIFS
+  # Pegando array com os repositórios
+  IFS=$'\n'
+  repo=($(cat "$infofile" | grep -v "^\s*#\|^$"))
+  IFS=$STDIFS
 
-	reposcount=${#repo[@]}
+  reposcount=${#repo[@]}
 
-	echo -e "[${cgreen}OK${cnormal}]"
+  echo -e "[${cgreen}OK${cnormal}]"
 
-	for (( i=0 ; i<$reposcount ; i++ )) ; do
-		reponame=$(echo "${repo[$i]}" | cut -f1)
+  for (( i=0 ; i<$reposcount ; i++ )) ; do
+    reponame=$(echo "${repo[$i]}" | cut -f1)
 
-		if ${sshmode} ; then
-			reporemote=$(echo "${repo[$i]}" | cut -f2)
-		else
-			reporemote=$(echo "${repo[$i]}" | cut -f3)
-		fi
+    if ${sshmode} ; then
+      reporemote=$(echo "${repo[$i]}" | cut -f2)
+    else
+      reporemote=$(echo "${repo[$i]}" | cut -f3)
+    fi
 
-		repolocal=$(echo "${repo[$i]}" | cut -f4)
+    repolocal=$(echo "${repo[$i]}" | cut -f4)
 
-		if [ -n "${reponame}" ] && [ -n "${reporemote}" ] && [ -n "${repolocal}" ] ; then
-			echo -e "\n${cgreen}###${cnormal} Repositório ${cyellow}${reponame}${cnormal} ${cgreen}###${cnormal}"
+    if [ -n "${reponame}" ] && [ -n "${reporemote}" ] && [ -n "${repolocal}" ] ; then
+      echo -e "\n${cgreen}###${cnormal} Repositório ${cyellow}${reponame}${cnormal} ${cgreen}###${cnormal}"
 
-			echo -e "Verificando repositório local ${cyellow}'${repolocal}'${cnormal}:"
+      echo -e "Verificando repositório local ${cyellow}'${repolocal}'${cnormal}:"
 
-			if ! [ -e "${repolocal}" ] ; then
-				echo -e "${cgreen}Repositório local não existe, obtendo...${cnormal}\n"
-				git clone "${reporemote}" "${repolocal}"
-			else
-				echo -e "${cred}Repositório local já existe, atualizando...${cnormal}\n"
+      if ! [ -e "${repolocal}" ] ; then
+        echo -e "${cgreen}Repositório local não existe, obtendo...${cnormal}\n"
+        git clone "${reporemote}" "${repolocal}"
+      else
+        echo -e "${cred}Repositório local já existe, atualizando...${cnormal}\n"
 
-				# Entrando no repolocal
-				cd "${repolocal}"
+        # Entrando no repolocal
+        cd "${repolocal}"
 
-				# Atualizando
-				git pull
+        # Atualizando
+        git pull
 
-				# Voltando ao repo principal
-				cd "${maindir}"
-			fi
-		fi
-	done
+        # Voltando ao repo principal
+        cd "${maindir}"
+      fi
+    fi
+  done
 }
 
 
 # Função principal install
 function installmain() {
-	echo -e "\n${cgreen} #################### Bem vindo ao Projeto LOS #################### ${cnormal}\n"
+  echo -e "\n${cgreen} #################### Bem vindo ao Projeto LOS #################### ${cnormal}\n"
 
-	if ! ${ignorelicence} && ! checklicence ; then
-		echo -e "${cred}A licença não foi aceita.${cnormal}"
-		echo -e "${cyellow}Abortando!${cnormal}\n"
-		exit 1
-	fi
+  if ! ${ignorelicence} && ! checklicence ; then
+    echo -e "${cred}A licença não foi aceita.${cnormal}"
+    echo -e "${cyellow}Abortando!${cnormal}\n"
+    exit 1
+  fi
 
-	if ${sshmode} ; then
-		reporemote="git@github.com:LucGoncalez/LuckyOS.git"
-	else
-		reporemote="https://github.com/LucGoncalez/LuckyOS.git"
-	fi
+  if ${sshmode} ; then
+    reporemote="git@github.com:LucGoncalez/los-base.git"
+  else
+    reporemote="https://github.com/LucGoncalez/los-base.git"
+  fi
 
-	echo -en "\nObtendo repositório principal (usando: ${cyellow}'${reporemote}'${cnormal})... "
+  echo -en "\nObtendo repositório principal (usando: ${cyellow}'${reporemote}'${cnormal})... "
 
-	if $(git clone "${reporemote}" >&2 2>/dev/null) ; then
-		echo -e "[${cgreen}OK${cnormal}]"
-	else
-		echo -e "[${cred}FALHA${cnormal}]"
-		echo -e "\n${cred}Não foi possível atualizar o repositório principal.${cnormal}"
-		echo -e "${cyellow}Abortando!${cnormal}\n"
-		exit 1
-	fi
+  if $(git clone "${reporemote}" LuckyOS >&2 2>/dev/null) ; then
+    echo -e "[${cgreen}OK${cnormal}]"
+  else
+    echo -e "[${cred}FALHA${cnormal}]"
+    echo -e "\n${cred}Não foi possível atualizar o repositório principal.${cnormal}"
+    echo -e "${cyellow}Abortando!${cnormal}\n"
+    exit 1
+  fi
 
-	cd LuckyOS
+  cd LuckyOS
 
-	getrepos
+  getrepos
 
 
-	echo -e "${cgreen}"
-	echo " ##########################################################################"
-	echo " #                                                                        #"
-	echo " #          Bem vindo ao Projeto LOS                                      #"
-	echo " #          ========================                                      #"
-	echo " #                                                                        #"
-	echo " #   Espero que tenha uma boa experiência com o LuckyOS                   #"
-	echo " #   Que possa compreender todos os conceitos básicos por trás de um SO   #"
-	echo " #   Que possa contribuir com esse projeto ou mesmo iniciar seu próprio   #"
-	echo " #                                                                        #"
-	echo " #   Boa Sorte nesta jornada, além da fronteira digital :)                #"
-	echo " #                                                                        #"
-	echo " ##########################################################################"
-	echo -e "${cnormal}"
+  echo -e "${cgreen}"
+  echo " ##########################################################################"
+  echo " #                                                                        #"
+  echo " #          Bem vindo ao Projeto LOS                                      #"
+  echo " #          ========================                                      #"
+  echo " #                                                                        #"
+  echo " #   Espero que tenha uma boa experiência com o LuckyOS                   #"
+  echo " #   Que possa compreender todos os conceitos básicos por trás de um SO   #"
+  echo " #   Que possa contribuir com esse projeto ou mesmo iniciar seu próprio   #"
+  echo " #                                                                        #"
+  echo " #   Boa Sorte nesta jornada, além da fronteira digital :)                #"
+  echo " #                                                                        #"
+  echo " ##########################################################################"
+  echo -e "${cnormal}"
 }
 
 # Função principal update
 function updatemain() {
-	if [ $(git remote -v show | grep "fetch" | grep "http" | wc -l) -eq 0 ] ; then
-		sshmode="true"
-	else
-		sshmode="false"
-	fi
+  if [ $(git remote -v show | grep "fetch" | grep "http" | wc -l) -eq 0 ] ; then
+    sshmode="true"
+  else
+    sshmode="false"
+  fi
 
-	echo -en "\nAtualizando repositório principal... "
+  echo -en "\nAtualizando repositório principal... "
 
-	if $(git pull 2>&1 > /dev/null) ; then
-		echo -e "[${cgreen}OK${cnormal}]"
-	else
-		echo -e "[${cred}FALHA${cnormal}]"
-		echo -e "\n${cred}Não foi possível atualizar o repositório principal.${cnormal}"
-		echo -e "${cyellow}Abortando!${cnormal}\n"
-		exit 1
-	fi
+  if $(git pull 2>&1 > /dev/null) ; then
+    echo -e "[${cgreen}OK${cnormal}]"
+  else
+    echo -e "[${cred}FALHA${cnormal}]"
+    echo -e "\n${cred}Não foi possível atualizar o repositório principal.${cnormal}"
+    echo -e "${cyellow}Abortando!${cnormal}\n"
+    exit 1
+  fi
 
-	getrepos
+  getrepos
 
-	echo -e "\n${cyellow}Tudo atualizado!${cnormal}\n"
+  echo -e "\n${cyellow}Tudo atualizado!${cnormal}\n"
 }
 
 
@@ -219,39 +219,39 @@ sshmode="false"
 ignorelicence="false"
 
 while [ "${error}" = "false" ] && [ $# -gt 0 ] ; do
-	if [ "${1:0:2}" = "--" ] ; then
-		case "$1" in
-			--ssh) sshmode="true" ;;
-			--ignore-licence) ignorelicence="true" ;;
-			*) error="true"
-		esac
-	elif [ "${1:0:1}" = "-" ] ; then
-		paramopt="${1:1}"
+  if [ "${1:0:2}" = "--" ] ; then
+    case "$1" in
+      --ssh) sshmode="true" ;;
+      --ignore-licence) ignorelicence="true" ;;
+      *) error="true"
+    esac
+  elif [ "${1:0:1}" = "-" ] ; then
+    paramopt="${1:1}"
 
-		while [ ${#paramopt} -gt 0 ] ; do
-			case "${paramopt:0:1}" in
-				s) sshmode="true" ;;
-				n) ignorelicence="true" ;;
-				*) error="true" ;;
-			esac
+    while [ ${#paramopt} -gt 0 ] ; do
+      case "${paramopt:0:1}" in
+        s) sshmode="true" ;;
+        n) ignorelicence="true" ;;
+        *) error="true" ;;
+      esac
 
-			paramopt="${paramopt:1}"
-	done
-	else
-		error="true"
-	fi
+      paramopt="${paramopt:1}"
+  done
+  else
+    error="true"
+  fi
 
-	shift
+  shift
 done
 
 if ${error} ; then
-	echo -e "${cred}Parametro informado incorreto.${cnormal}"
-	echo -e "${cyellow}Abortando!${cnormal}\n"
-	exit 1
+  echo -e "${cred}Parametro informado incorreto.${cnormal}"
+  echo -e "${cyellow}Abortando!${cnormal}\n"
+  exit 1
 fi
 
 if [ -d ".git" ] ; then
-	updatemain
+  updatemain
 else
-	installmain
+  installmain
 fi;

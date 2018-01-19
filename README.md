@@ -1,5 +1,5 @@
-# LuckyOS #
-**Repositório principal do Projeto LOS**
+# los-base (LuckyOS) #
+**Antigo repositório principal do Projeto LOS (fora de uso)**
 
 O Projeto LOS pretende criar um sistema operacional simples, em Pascal e Assembly, com código fonte aberto.
 
